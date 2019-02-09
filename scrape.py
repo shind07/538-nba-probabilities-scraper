@@ -8,9 +8,11 @@ SLEEP_TIME_BUFFER = 800 # 15 mins
 csv_name = 'playoff_probabilities.csv'
 schema = ['date', 'carmelo_full', 'carmelo_cur', 'team', 'record', 'conferece', 'proj_record', 'proj_diff','playoff_%', 'playoff_adj', 'finals_%', 'champion_%']
 
+url = 'https://projects.fivethirtyeight.com/2019-nba-predictions/'
+
 def main(*args):
     while True:
-        url = 'https://projects.fivethirtyeight.com/2019-nba-predictions/'
+
         response = requests.get(url)
         tree = lxml.html.fromstring(response.text)
         #tree = lxml.html.parse('sample.html').getroot()
@@ -52,6 +54,6 @@ def main(*args):
         delay = SLEEP_TIME + (random.random() * SLEEP_TIME_BUFFER)
         print('Sleeping for {}'.format(str(datetime.timedelta(seconds=delay))))
         time.sleep(delay)
-        
+
 if __name__ == '__main__':
     main(*sys.argv)
